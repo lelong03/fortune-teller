@@ -1,0 +1,33 @@
+{% extends "prediction/base.html" %}
+{% block content %}
+<div class="text-center" style="margin-bottom: 20px;">
+  <p>Your current age: <strong>{{ user_age }}</strong></p>
+  <p>Please choose the most correct past events that happened in your life.</p>
+</div>
+
+{% if types_with_events %}
+  {% for item in types_with_events %}
+  <!-- Entire card is clickable -->
+  <a href="{% url 'prediction:type_detail' item.type.id %}" style="text-decoration: none; color: inherit;">
+    <div class="type-card">
+      <h3>{{ item.type.name }}</h3>
+      <p>{{ item.type.description }}</p>
+      <ul>
+        {% for event in item.events %}
+        <li>
+          Age {{ event.age }}: {{ event.description }}
+          {% if event.description_2 %} | {{ event.description_2 }}{% endif %}
+          {% if event.description_3 %} | {{ event.description_3 }}{% endif %}
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </a>
+  {% endfor %}
+{% else %}
+  <p class="text-center">
+    Team has not updated information for this type of future. Please check back later.
+  </p>
+{% endif %}
+
+{% endblock %}
