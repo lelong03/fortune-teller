@@ -51,10 +51,32 @@
     padding: 10px;
     border-bottom: 1px solid #ddd;
   }
+  /* Back button styling */
+  .back-button {
+    margin-bottom: 20px;
+  }
+  .back-link {
+    display: inline-block;
+    font-size: 16px;
+    color: #5B3CC4;
+    text-decoration: none;
+    border: 2px solid #5B3CC4;
+    padding: 6px 12px;
+    border-radius: 8px;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  .back-link:hover {
+    background-color: #5B3CC4;
+    color: #fff;
+  }
 </style>
-
 <div id="main-wrapper">
   <div class="card-container">
+    <div class="back-button">
+      <a href="{% url 'prediction:index' %}" class="back-link" title="Back">
+        <i class="fas fa-home"></i>
+      </a>
+    </div>
     <h2>{{ type.name }}</h2>
     <p>{{ type.description }}</p>
     <h3 style="text-align: center; margin-bottom: 15px;">Future Events</h3>

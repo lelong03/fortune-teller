@@ -4,13 +4,17 @@
     <meta charset="UTF-8">
     <title>Fortune Teller</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Load Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <style>
-        /* Global styles for pages other than index */
+        /*
+          Global styles for pages other than index.
+          Note: The header text "Fortune Teller" has been removed from here.
+        */
         body {
             margin: 0;
             padding: 0;
             font-family: Arial, sans-serif;
-            /* Use a neutral light background */
             background-color: #f8f9fa;
             min-height: 100vh;
         }
@@ -82,7 +86,6 @@
     </style>
 </head>
 <body>
-    <!-- Notice: We no longer output any header text here -->
     <div class="container">
         {% block content %}
         {% endblock %}

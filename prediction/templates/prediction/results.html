@@ -1,7 +1,6 @@
 {% extends "prediction/base.html" %}
 {% block content %}
 <style>
-  /* Override base container for full-screen layout */
   .container {
     margin: 0;
     padding: 0;
@@ -62,10 +61,36 @@
     list-style: none;
     padding-left: 0;
   }
+  /* Back button styling */
+  .back-button {
+    margin-bottom: 20px;
+    align-self: flex-start;
+  }
+  .back-link {
+    display: inline-block;
+    font-size: 16px;
+    color: #5B3CC4;
+    text-decoration: none;
+    border: 2px solid #5B3CC4;
+    padding: 6px 12px;
+    border-radius: 8px;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  .back-link:hover {
+    background-color: #5B3CC4;
+    color: #fff;
+  }
+  .text-center {
+    text-align: center;
+  }
 </style>
-
 <div id="main-wrapper">
   <div class="card-container">
+    <div class="back-button">
+      <a href="{% url 'prediction:index' %}" class="back-link" title="Back">
+          <i class="fas fa-arrow-left"></i>
+      </a>
+    </div>
     <div class="text-center" style="margin-bottom: 20px;">
       <p>Your current age: <strong>{{ user_age }}</strong></p>
       <p>Please choose the most correct past events that happened in your life.</p>
