@@ -1,20 +1,72 @@
 {% extends "prediction/base.html" %}
 {% block content %}
-<div class="text-center">
-  <h2>{{ type.name }}</h2>
-  <p>{{ type.description }}</p>
-</div>
+<style>
+  /* Override base container for full-screen layout */
+  .container {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    max-width: 100%;
+    background-color: transparent;
+    box-shadow: none;
+    border-radius: 0;
+  }
+  body {
+    background: linear-gradient(135deg, #f6d365, #fda085);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+  #main-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 20px;
+  }
+  .card-container {
+    background-color: #fff;
+    width: 90%;
+    max-width: 600px;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  }
+  .card-container h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 10px;
+    font-size: 26px;
+  }
+  .card-container p {
+    text-align: center;
+    color: #555;
+    margin-bottom: 20px;
+  }
+  .event-list {
+    list-style: none;
+    padding: 0;
+  }
+  .event-list li {
+    margin-bottom: 12px;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+  }
+</style>
 
-<div style="margin-top: 20px;">
-  <h3>Future Events</h3>
-  <ul>
-    {% for event in events %}
-    <li style="margin-bottom: 8px;">
-      Age {{ event.age }}: {{ event.description }}
-      {% if event.description_2 %} | {{ event.description_2 }}{% endif %}
-      {% if event.description_3 %} | {{ event.description_3 }}{% endif %}
-    </li>
-    {% endfor %}
-  </ul>
+<div id="main-wrapper">
+  <div class="card-container">
+    <h2>{{ type.name }}</h2>
+    <p>{{ type.description }}</p>
+    <h3 style="text-align: center; margin-bottom: 15px;">Future Events</h3>
+    <ul class="event-list">
+      {% for event in events %}
+      <li>
+        Age {{ event.age }}: {{ event.description }}
+        {% if event.description_2 %} | {{ event.description_2 }}{% endif %}
+        {% if event.description_3 %} | {{ event.description_3 }}{% endif %}
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
 </div>
 {% endblock %}

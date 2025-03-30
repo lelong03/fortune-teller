@@ -1,31 +1,98 @@
 {% extends "prediction/base.html" %}
 {% block content %}
-<div class="text-center" style="margin-bottom: 20px;">
-  <p>Your current age: <strong>{{ user_age }}</strong></p>
-  <p>Please choose the most correct past events that happened in your life.</p>
-</div>
+<style>
+  /* Override base container for full-screen layout */
+  .container {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    max-width: 100%;
+    background-color: transparent;
+    box-shadow: none;
+    border-radius: 0;
+  }
+  body {
+    background: linear-gradient(135deg, #f6d365, #fda085);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+  #main-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    min-height: 100vh;
+    padding: 20px;
+  }
+  .card-container {
+    background-color: #fff;
+    width: 90%;
+    max-width: 600px;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+  }
+  .card-container h3 {
+    color: #333;
+    margin-bottom: 10px;
+  }
+  .card-container p {
+    color: #555;
+  }
+  .type-card {
+    border: 1px solid #ddd;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 6px;
+    transition: box-shadow 0.2s ease;
+    background-color: #fff;
+  }
+  .type-card:hover {
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  }
+  .type-card h3 {
+    margin: 0;
+    color: #5B3CC4;
+  }
+  .type-card p {
+    color: #555;
+  }
+  .type-card ul {
+    list-style: none;
+    padding-left: 0;
+  }
+</style>
 
-{% if types_with_events %}
-  {% for item in types_with_events %}
-  <a href="{% url 'prediction:type_detail' item.type.id %}" style="text-decoration: none; color: inherit;">
-    <div class="type-card">
-      <h3>{{ item.type.name }}</h3>
-      <p>{{ item.type.description }}</p>
-      <ul>
-        {% for event in item.events %}
-        <li>
-          Age {{ event.age }}: {{ event.description }}
-          {% if event.description_2 %} | {{ event.description_2 }}{% endif %}
-          {% if event.description_3 %} | {{ event.description_3 }}{% endif %}
-        </li>
-        {% endfor %}
-      </ul>
+<div id="main-wrapper">
+  <div class="card-container">
+    <div class="text-center" style="margin-bottom: 20px;">
+      <p>Your current age: <strong>{{ user_age }}</strong></p>
+      <p>Please choose the most correct past events that happened in your life.</p>
     </div>
-  </a>
-  {% endfor %}
-{% else %}
-  <p class="text-center">
-    Team has not updated information for this type of future. Please check back later.
-  </p>
-{% endif %}
+    {% if types_with_events %}
+      {% for item in types_with_events %}
+      <a href="{% url 'prediction:type_detail' item.type.id %}" style="text-decoration: none; color: inherit;">
+        <div class="type-card">
+          <h3>{{ item.type.name }}</h3>
+          <p>{{ item.type.description }}</p>
+          <ul>
+            {% for event in item.events %}
+            <li>
+              Age {{ event.age }}: {{ event.description }}
+              {% if event.description_2 %} | {{ event.description_2 }}{% endif %}
+              {% if event.description_3 %} | {{ event.description_3 }}{% endif %}
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
+      </a>
+      {% endfor %}
+    {% else %}
+      <p class="text-center">
+        Team has not updated information for this type of future. Please check back later.
+      </p>
+    {% endif %}
+  </div>
+</div>
 {% endblock %}

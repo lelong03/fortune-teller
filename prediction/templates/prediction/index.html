@@ -1,7 +1,8 @@
 {% extends "prediction/base.html" %}
+{% load static %}
 {% block content %}
 <style>
-  /* Remove the white background and shadow from the base .container */
+  /* Remove base container styling for this page */
   .container {
     margin: 0;
     padding: 0;
@@ -11,15 +12,13 @@
     box-shadow: none;
     border-radius: 0;
   }
-
-  /* Pastel gradient for the entire body */
+  /* Pastel gradient background for the entire page */
   body {
     background: linear-gradient(135deg, #f6d365, #fda085);
     min-height: 100vh;
-    overflow-x: hidden; /* avoid horizontal scroll */
+    overflow-x: hidden;
   }
-
-  /* Fullscreen wrapper for centering */
+  /* Fullscreen flex wrapper to center the card */
   #main-wrapper {
     display: flex;
     align-items: center;
@@ -27,9 +26,8 @@
     min-height: 100vh;
     padding: 20px;
   }
-
-  /* The card that actually holds the form */
-  .form-container {
+  /* Card container for the form */
+  .card-container {
     background-color: #fff;
     width: 90%;
     max-width: 360px;
@@ -37,14 +35,24 @@
     padding: 20px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.1);
   }
-
-  .form-container h2 {
+  .card-container h2 {
     text-align: center;
     color: #333;
     margin-bottom: 20px;
     font-size: 24px;
   }
-
+  /* Image container with circular image styling */
+  .image-container {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  .image-container img {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    border: 3px solid #5B3CC4;
+    object-fit: cover;
+  }
   .form-group {
     margin-bottom: 15px;
   }
@@ -54,7 +62,6 @@
     margin-bottom: 5px;
     color: #555;
   }
-
   input, select {
     width: 100%;
     padding: 10px;
@@ -64,7 +71,6 @@
     margin-bottom: 10px;
     box-sizing: border-box;
   }
-
   button.submit-btn {
     width: 100%;
     padding: 12px;
@@ -79,7 +85,6 @@
   button.submit-btn:hover {
     background-color: #4A2E9F;
   }
-
   .error {
     color: red;
     text-align: center;
@@ -87,13 +92,13 @@
   }
 </style>
 
-<!--
-  #main-wrapper covers the entire screen
-  and centers the form container vertically and horizontally
--->
 <div id="main-wrapper">
-  <div class="form-container">
-    <h2>Enter Your Details</h2>
+  <div class="card-container">
+    <h2>Fortune Teller</h2>
+    <div class="image-container">
+      <!-- Replace 'fortune.png' with your actual image filename -->
+      <img src="{% static 'images/fortune.png' %}" alt="Fortune Teller">
+    </div>
     {% if error_message %}
       <p class="error">{{ error_message }}</p>
     {% endif %}
