@@ -1,17 +1,114 @@
 {% extends "prediction/base.html" %}
 {% block content %}
-<h2>Enter Your Details</h2>
-{% if error_message %}
-  <p class="error">{{ error_message }}</p>
-{% endif %}
-<form method="post">
-    {% csrf_token %}
-    <label for="id_gender">Gender:</label>
-    {{ form.gender }}
-    <br>
-    <label for="id_birthday">Birthday:</label>
-    {{ form.birthday }}
-    <br>
-    <button type="submit">Predict Future</button>
-</form>
+<style>
+  /* Remove the white background and shadow from the base .container */
+  .container {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    max-width: 100%;
+    background-color: transparent;
+    box-shadow: none;
+    border-radius: 0;
+  }
+
+  /* Pastel gradient for the entire body */
+  body {
+    background: linear-gradient(135deg, #f6d365, #fda085);
+    min-height: 100vh;
+    overflow-x: hidden; /* avoid horizontal scroll */
+  }
+
+  /* Fullscreen wrapper for centering */
+  #main-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 20px;
+  }
+
+  /* The card that actually holds the form */
+  .form-container {
+    background-color: #fff;
+    width: 90%;
+    max-width: 360px;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  }
+
+  .form-container h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+    font-size: 24px;
+  }
+
+  .form-group {
+    margin-bottom: 15px;
+  }
+  .form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #555;
+  }
+
+  input, select {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+  }
+
+  button.submit-btn {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 6px;
+    background-color: #5B3CC4;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  button.submit-btn:hover {
+    background-color: #4A2E9F;
+  }
+
+  .error {
+    color: red;
+    text-align: center;
+    margin-bottom: 10px;
+  }
+</style>
+
+<!--
+  #main-wrapper covers the entire screen
+  and centers the form container vertically and horizontally
+-->
+<div id="main-wrapper">
+  <div class="form-container">
+    <h2>Enter Your Details</h2>
+    {% if error_message %}
+      <p class="error">{{ error_message }}</p>
+    {% endif %}
+    <form method="post">
+      {% csrf_token %}
+      <div class="form-group">
+        <label for="id_gender">Gender</label>
+        {{ form.gender }}
+      </div>
+      <div class="form-group">
+        <label for="id_birthday">Birthday</label>
+        {{ form.birthday }}
+      </div>
+      <button type="submit" class="submit-btn">Predict Future</button>
+    </form>
+  </div>
+</div>
 {% endblock %}

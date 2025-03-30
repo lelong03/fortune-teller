@@ -1,12 +1,13 @@
 {% extends "prediction/base.html" %}
 {% block content %}
 <div class="text-center">
-  <h2 style="color: #ffd39a;">{{ type.name }}</h2>
+  <h2>{{ type.name }}</h2>
   <p>{{ type.description }}</p>
 </div>
+
 <div style="margin-top: 20px;">
-  <h3 style="color: #fff;">Future Events</h3>
-  <ul style="background-color: #fff; color: #333; padding: 15px; border-radius: 8px;">
+  <h3>Future Events</h3>
+  <ul>
     {% for event in events %}
     <li style="margin-bottom: 8px;">
       Age {{ event.age }}: {{ event.description }}

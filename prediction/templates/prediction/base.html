@@ -5,60 +5,105 @@
     <title>Fortune Teller</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
-        /* Minimal responsive and flat design styling */
+        /*
+          Neutral design for base.html so other pages (results, detail)
+          can keep the white .container card. We'll let index.html
+          override or remove these styles if needed.
+        */
+
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f8f9fa;
             margin: 0;
             padding: 0;
+            font-family: Arial, sans-serif;
+            /* Use a neutral background or very light color */
+            background-color: #f8f9fa;
+            min-height: 100vh;
         }
+
         .container {
             width: 90%;
             max-width: 800px;
-            margin: 20px auto;
+            margin: 40px auto;
             background-color: #fff;
             padding: 20px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
-        .type-card {
-            border: 1px solid #ddd;
-            padding: 15px;
-            margin-bottom: 15px;
-            border-radius: 4px;
+
+        h1, h2, h3 {
+            margin-top: 0;
+            color: #333;
         }
+        p {
+            color: #555;
+            line-height: 1.5;
+        }
+
+        .error {
+            color: red;
+            margin-bottom: 10px;
+        }
+
         a {
-            color: #007bff;
+            color: #5B3CC4;
             text-decoration: none;
         }
         a:hover {
             text-decoration: underline;
         }
-        .error {
-            color: red;
-        }
+
+        /* Form elements */
         input, select {
-            padding: 8px;
+            display: block;
             width: 100%;
-            margin-bottom: 10px;
+            padding: 10px;
+            margin-bottom: 12px;
+            font-size: 14px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
         }
+
+        /* Buttons */
         button {
-            padding: 10px 20px;
-            background-color: #007bff;
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: #5B3CC4;
             border: none;
-            color: white;
+            border-radius: 6px;
+            color: #fff;
+            font-size: 14px;
             cursor: pointer;
-            border-radius: 4px;
+            transition: background-color 0.2s ease;
         }
         button:hover {
-            background-color: #0056b3;
+            background-color: #4A2E9F;
+        }
+
+        /* For the results page .type-card */
+        .type-card {
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 6px;
+            transition: box-shadow 0.2s ease;
+            background-color: #fff;
+        }
+        .type-card:hover {
+            box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+        }
+
+        .text-center {
+            text-align: center;
         }
     </style>
 </head>
 <body>
-<div class="container">
-    <h1>Fortune Teller</h1>
-    {% block content %}
-    {% endblock %}
-</div>
+    <!-- The container for content. Other pages (results, detail)
+         will use it. We will override or remove it in index.html. -->
+    <div class="container">
+        <h1>Fortune Teller</h1>
+        {% block content %}
+        {% endblock %}
+    </div>
 </body>
 </html>

@@ -7,7 +7,6 @@
 
 {% if types_with_events %}
   {% for item in types_with_events %}
-  <!-- Entire card is clickable -->
   <a href="{% url 'prediction:type_detail' item.type.id %}" style="text-decoration: none; color: inherit;">
     <div class="type-card">
       <h3>{{ item.type.name }}</h3>
@@ -29,5 +28,4 @@
     Team has not updated information for this type of future. Please check back later.
   </p>
 {% endif %}
-
 {% endblock %}
