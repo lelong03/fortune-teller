@@ -1,8 +1,8 @@
 {% extends "prediction/base.html" %}
-{% load static %}
+{% load static i18n %}
 {% block content %}
 <style>
-  /* Remove the white base container styling for index */
+  /* Override base container styling for index page */
   .container {
     margin: 0;
     padding: 0;
@@ -12,13 +12,13 @@
     box-shadow: none;
     border-radius: 0;
   }
-  /* Pastel gradient background for the entire page */
+  /* Pastel gradient background for index page */
   body {
     background: linear-gradient(135deg, #f6d365, #fda085);
     min-height: 100vh;
     overflow-x: hidden;
   }
-  /* Fullscreen flex wrapper to center the card */
+  /* Center the form card */
   #main-wrapper {
     display: flex;
     align-items: center;
@@ -26,7 +26,6 @@
     min-height: 100vh;
     padding: 20px;
   }
-  /* Card container for the form */
   .card-container {
     background-color: #fff;
     width: 90%;
@@ -41,7 +40,6 @@
     margin-bottom: 20px;
     font-size: 24px;
   }
-  /* Image container with circular image styling */
   .image-container {
     text-align: center;
     margin-bottom: 20px;
@@ -94,10 +92,10 @@
 
 <div id="main-wrapper">
   <div class="card-container">
-    <h2>Fortune Teller</h2>
+    <h2>{% trans "Fortune Teller" %}</h2>
     <div class="image-container">
-      <!-- Replace 'fortune.png' with your actual image filename -->
-      <img src="{% static 'images/fortune.png' %}" alt="Fortune Teller">
+      <!-- Ensure your image is located at static/images/fortune.png -->
+      <img src="{% static 'images/fortune.png' %}" alt="{% trans 'Fortune Teller' %}">
     </div>
     {% if error_message %}
       <p class="error">{{ error_message }}</p>
@@ -105,14 +103,14 @@
     <form method="post">
       {% csrf_token %}
       <div class="form-group">
-        <label for="id_gender">Gender</label>
+        <label for="id_gender">{% trans "Gender" %}</label>
         {{ form.gender }}
       </div>
       <div class="form-group">
-        <label for="id_birthday">Birthday</label>
+        <label for="id_birthday">{% trans "Birthday" %}</label>
         {{ form.birthday }}
       </div>
-      <button type="submit" class="submit-btn">Predict Future</button>
+      <button type="submit" class="submit-btn">{% trans "Predict Future" %}</button>
     </form>
   </div>
 </div>

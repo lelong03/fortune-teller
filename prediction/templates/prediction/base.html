@@ -1,22 +1,23 @@
+{% load i18n %}
 <!DOCTYPE html>
-<html lang="en">
+{% get_current_language as LANGUAGE_CODE %}
+<html lang="{{ LANGUAGE_CODE }}">
 <head>
     <meta charset="UTF-8">
-    <title>Fortune Teller</title>
+    <title>{% trans "Fortune Teller" %}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- Load Font Awesome for icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    {% load i18n static %}
+    <!-- Load Font Awesome if needed for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" crossorigin="anonymous" />
     <style>
-        /*
-          Global styles for pages other than index.
-          Note: The header text "Fortune Teller" has been removed from here.
-        */
+        /* Global styles for non-index pages */
         body {
             margin: 0;
             padding: 0;
             font-family: Arial, sans-serif;
             background-color: #f8f9fa;
             min-height: 100vh;
+            position: relative;
         }
         .container {
             width: 90%;
@@ -83,9 +84,47 @@
         .text-center {
             text-align: center;
         }
+        /* Language switcher */
+        #language-switcher {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+        #language-switcher form {
+            display: inline;
+        }
+        #language-switcher button {
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+        #language-switcher img {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+        }
     </style>
 </head>
 <body>
+    <!-- Language Switcher -->
+    <div id="language-switcher">
+      <form action="{% url 'set_language' %}" method="post">
+          {% csrf_token %}
+          {% get_current_language as LANGUAGE_CODE %}
+          {% if LANGUAGE_CODE == "vi" %}
+            <input type="hidden" name="language" value="en">
+            <button type="submit" title="{% trans 'Switch to English' %}">
+              <img src="{% static 'images/gb.png' %}" alt="{% trans 'English' %}">
+            </button>
+          {% else %}
+            <input type="hidden" name="language" value="vi">
+            <button type="submit" title="{% trans 'Chuyển sang Tiếng Việt' %}">
+              <img src="{% static 'images/vi.png' %}" alt="{% trans 'Tiếng Việt' %}">
+            </button>
+          {% endif %}
+      </form>
+    </div>
+
     <div class="container">
         {% block content %}
         {% endblock %}

@@ -1,4 +1,5 @@
 {% extends "prediction/base.html" %}
+{% load i18n %}
 {% block content %}
 <style>
   .container {
@@ -68,11 +69,11 @@
   }
   .back-link {
     display: inline-block;
-    font-size: 16px;
+    font-size: 20px;
     color: #5B3CC4;
     text-decoration: none;
     border: 2px solid #5B3CC4;
-    padding: 6px 12px;
+    padding: 6px 10px;
     border-radius: 8px;
     transition: background-color 0.3s, color 0.3s;
   }
@@ -87,13 +88,13 @@
 <div id="main-wrapper">
   <div class="card-container">
     <div class="back-button">
-      <a href="{% url 'prediction:index' %}" class="back-link" title="Back">
-          <i class="fas fa-arrow-left"></i>
+      <a href="{% url 'prediction:index' %}" class="back-link" title="{% trans 'Back' %}">
+        <i class="fas fa-arrow-left"></i>
       </a>
     </div>
     <div class="text-center" style="margin-bottom: 20px;">
-      <p>Your current age: <strong>{{ user_age }}</strong></p>
-      <p>Please choose the most correct past events that happened in your life.</p>
+      <p>{% trans "Your current age:" %} <strong>{{ user_age }}</strong></p>
+      <p>{% trans "Please choose the most correct past events that happened in your life." %}</p>
     </div>
     {% if types_with_events %}
       {% for item in types_with_events %}
@@ -104,7 +105,7 @@
           <ul>
             {% for event in item.events %}
             <li>
-              Age {{ event.age }}: {{ event.description }}
+              {% trans "Age" %} {{ event.age }}: {{ event.description }}
               {% if event.description_2 %} | {{ event.description_2 }}{% endif %}
               {% if event.description_3 %} | {{ event.description_3 }}{% endif %}
             </li>
@@ -115,7 +116,7 @@
       {% endfor %}
     {% else %}
       <p class="text-center">
-        Team has not updated information for this type of future. Please check back later.
+        {% trans "Team has not updated information for this type of future. Please check back later." %}
       </p>
     {% endif %}
   </div>

@@ -16,8 +16,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.conf.urls.i18n import i18n_patterns
 
 urlpatterns = [
+    # Non-translated URLs (like admin)
     path('admin/', admin.site.urls),
-    path('', include('prediction.urls')),  # Include our app’s URLs
+    # Include Django's built-in i18n URL patterns
+    path('i18n/', include('django.conf.urls.i18n')),
 ]
+
+urlpatterns += i18n_patterns(
+    path('', include('prediction.urls')),
+)

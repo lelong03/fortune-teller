@@ -1,7 +1,8 @@
 {% extends "prediction/base.html" %}
+{% load i18n %}
 {% block content %}
 <style>
-  /* Override base container for full-screen layout */
+  /* Full-screen layout override */
   .container {
     margin: 0;
     padding: 0;
@@ -57,11 +58,11 @@
   }
   .back-link {
     display: inline-block;
-    font-size: 16px;
+    font-size: 20px;
     color: #5B3CC4;
     text-decoration: none;
     border: 2px solid #5B3CC4;
-    padding: 6px 12px;
+    padding: 6px 10px;
     border-radius: 8px;
     transition: background-color 0.3s, color 0.3s;
   }
@@ -73,17 +74,17 @@
 <div id="main-wrapper">
   <div class="card-container">
     <div class="back-button">
-      <a href="{% url 'prediction:index' %}" class="back-link" title="Back">
-        <i class="fas fa-home"></i>
+      <a href="{% url 'prediction:index' %}" class="back-link" title="{% trans 'Back' %}">
+        <i class="fas fa-arrow-left"></i>
       </a>
     </div>
     <h2>{{ type.name }}</h2>
     <p>{{ type.description }}</p>
-    <h3 style="text-align: center; margin-bottom: 15px;">Future Events</h3>
+    <h3 style="text-align: center; margin-bottom: 15px;">{% trans "Future Events" %}</h3>
     <ul class="event-list">
       {% for event in events %}
       <li>
-        Age {{ event.age }}: {{ event.description }}
+        {% trans "Age" %} {{ event.age }}: {{ event.description }}
         {% if event.description_2 %} | {{ event.description_2 }}{% endif %}
         {% if event.description_3 %} | {{ event.description_3 }}{% endif %}
       </li>
