@@ -1,0 +1,31 @@
+# Python bytecode and caches
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment folder (adjust if you named it something else)
+venv/
+
+# Django-specific files
+db.sqlite3
+*.log
+local_settings.py
+
+# Static and media files (if you are collecting static files and serving media)
+staticfiles/
+media/
+
+# Build artifacts and distribution packages
+build/
+dist/
+*.egg-info/
+
+# IDE folders
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# OS-specific files
+.DS_Store
+Thumbs.db

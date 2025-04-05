@@ -27,4 +27,5 @@ urlpatterns = [
 
 urlpatterns += i18n_patterns(
     path('', include('prediction.urls')),
+    prefix_default_language=False,
 )
